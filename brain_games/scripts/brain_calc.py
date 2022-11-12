@@ -33,14 +33,14 @@ def main():
         second_operand = core.get_random_number()
         operator = get_operand()
 
-        currect_answer = calculate_answer(operator,
+        correct_answer = calculate_answer(operator,
                                           first_operand,
                                           second_operand)
 
         core.print_question(f'{first_operand} {operator} {second_operand}')
         answer = core.get_answer()
 
-        is_correct_answer = core.compare_answers(answer, str(currect_answer))
+        is_correct_answer = core.compare_answers(answer, str(correct_answer))
         is_win = is_correct_answer
         if is_correct_answer is not True:
             break

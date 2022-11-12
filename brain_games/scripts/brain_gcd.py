@@ -1,31 +1,27 @@
 #!/usr/bin/env python3
 
 from . import core
-
-
-def is_even(num):
-    return num % 2 == 0
+from math import gcd
 
 
 def main():
     name = core.greeting()
-    print('Answer "yes" if the number is even, otherwise answer "no"')
+    print('Find the greatest common divisor of given numbers.')
     i = 0
     is_win = True
 
     while i < core.GAMES_COUNT:
-        number = core.get_random_number()
+        first_operand = core.get_random_number()
+        second_operand = core.get_random_number()
 
-        correct_answer = 'yes' if is_even(number) else 'no'
-        core.print_question(number)
+        correct_answer = gcd(first_operand, second_operand)
+        core.print_question(f'{first_operand} {second_operand}')
         answer = core.get_answer()
 
-        is_correct_answer = core.compare_answers(answer, correct_answer)
+        is_correct_answer = core.compare_answers(answer, str(correct_answer))
         is_win = is_correct_answer
-
         if is_correct_answer is not True:
             break
-
         i += 1
 
     if is_win:
