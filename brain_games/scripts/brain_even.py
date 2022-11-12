@@ -9,7 +9,7 @@ def is_even(num):
 
 def main():
     name = core.greeting()
-    print('Answer "yes" if the number is even, otherwise answer "no"')
+    print('Answer "yes" if the number is even, otherwise answer "no".')
     i = 0
     is_win = True
 
