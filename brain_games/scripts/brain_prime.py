@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-from . import core
+from brain_games.game_engine import run_game
+from brain_games.utils import get_random_number, print_question, get_answer
 
 
 def is_prime(number):
@@ -14,31 +15,16 @@ def is_prime(number):
     return True
 
 
-def main():
-    name = core.greeting()
-    print('Answer "yes" if given number is prime. Otherwise answer "no".')
-    i = 0
-    is_win = True
+def run():
+    number = get_random_number()
+    print_question(number)
 
-    while i < core.GAMES_COUNT:
-        number = core.get_random_number()
-        correct_answer = 'yes' if is_prime(number) else 'no'
+    correct_answer = 'yes' if is_prime(number) else 'no'
+    user_answer = get_answer()
 
-        core.print_question(number)
-        answer = core.get_answer()
-        is_correct_answer = core.compare_answers(answer, correct_answer)
-
-        is_win = is_correct_answer
-        if is_correct_answer is not True:
-            break
-
-        i += 1
-
-    if is_win:
-        core.print_win_game_notification(name)
-    else:
-        core.print_failed_game_notification(name)
+    return user_answer, correct_answer
 
 
 if __name__ == '__main__':
-    main()
+    rules = 'Answer "yes" if given number is prime. Otherwise answer "no".'
+    run_game(run, rules)

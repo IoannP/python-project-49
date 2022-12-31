@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
-from . import core
+from brain_games.game_engine import run_game
+from brain_games.utils import get_random_number, print_question, get_answer
 
 
-def get_operand():
-    num = core.get_random_number(1, 3)
+def get_operator():
+    num = get_random_number(1, 3)
     if num == 1:
         return '*'
     elif num == 2:
@@ -22,35 +23,24 @@ def calculate_answer(operator, first_operand, second_operand):
         return first_operand + second_operand
 
 
-def main():
-    name = core.greeting()
+def run(game_count):
     print('What is the result of the expression?')
-    i = 0
-    is_win = True
 
-    while i < core.GAMES_COUNT:
-        first_operand = core.get_random_number()
-        second_operand = core.get_random_number()
-        operator = get_operand()
+    while game_count:
+        first_operand = get_random_number()
+        second_operand = get_random_number()
+        operator = get_operator()
+
+        print_question(f'{first_operand} {operator} {second_operand}')
 
         correct_answer = calculate_answer(operator,
                                           first_operand,
                                           second_operand)
+        user_answer = get_answer()
 
-        core.print_question(f'{first_operand} {operator} {second_operand}')
-        answer = core.get_answer()
-
-        is_correct_answer = core.compare_answers(answer, str(correct_answer))
-        is_win = is_correct_answer
-        if is_correct_answer is not True:
-            break
-        i += 1
-
-    if is_win:
-        core.print_win_game_notification(name)
-    else:
-        core.print_failed_game_notification(name)
+        return user_answer, correct_answer
 
 
 if __name__ == '__main__':
-    main()
+    rules = 'What is the result of the expression?'
+    run_game(run, rules)
