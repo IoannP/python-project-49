@@ -3,6 +3,6 @@ exclude_patterns:
 version: "2"         # required to adjust maintainability checks
 checks:
   similar-code:
-    enabled: false
+    enabled: true
   identical-code:
-    enabled: false
+    enabled: true
