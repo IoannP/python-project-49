@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-from brain_games.game_engine import run_game
-from brain_games.utils import get_random_number, print_question, get_answer
+from brain_games.game_engine import play_game
+from brain_games.utils import get_random_number
 
 
 def generate_progression():
@@ -21,19 +21,20 @@ def hide(progression, index):
     progression[index] = '..'
 
 
-def run():
+def run_progression_game():
     progression = generate_progression()
     hidden_number_index = get_random_number(0, len(progression) - 1)
 
     corrent_answer = progression[hidden_number_index]
-    user_answer = get_answer()
-
     hide(progression, hidden_number_index)
-    print_question(' '.join(progression))
 
-    return corrent_answer, user_answer
+    return ' '.join(progression), corrent_answer
+
+
+def main():
+    rules = 'What number is missing in the progression?'
+    play_game(run_progression_game, rules)
 
 
 if __name__ == '__main__':
-    rules = 'What number is missing in the progression?'
-    run_game(run, rules)
+    main()

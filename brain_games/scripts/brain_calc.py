@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
-from brain_games.game_engine import run_game
-from brain_games.utils import get_random_number, print_question, get_answer
+from operator import add, mul, sub
+from brain_games.game_engine import play_game
+from brain_games.utils import get_random_number
 
 
 def get_operator():
@@ -14,33 +15,30 @@ def get_operator():
         return '+'
 
 
-def calculate_answer(operator, first_operand, second_operand):
+def calculate(operator, first_operand, second_operand):
     if operator == '*':
-        return first_operand * second_operand
+        return mul(first_operand, second_operand)
     if operator == '-':
-        return first_operand - second_operand
+        return sub(first_operand, second_operand)
     if operator == '+':
-        return first_operand + second_operand
+        return add(first_operand, second_operand)
 
 
-def run(game_count):
-    print('What is the result of the expression?')
+def run_calc_game():
+    first_operand = get_random_number()
+    second_operand = get_random_number()
+    operator = get_operator()
 
-    while game_count:
-        first_operand = get_random_number()
-        second_operand = get_random_number()
-        operator = get_operator()
+    question = f'{first_operand} {operator} {second_operand}'
+    correct_answer = calculate(operator, first_operand, second_operand)
 
-        print_question(f'{first_operand} {operator} {second_operand}')
+    return question, correct_answer
 
-        correct_answer = calculate_answer(operator,
-                                          first_operand,
-                                          second_operand)
-        user_answer = get_answer()
 
-        return user_answer, correct_answer
+def main():
+    rules = 'What is the result of the expression?'
+    play_game(run_calc_game, rules)
 
 
 if __name__ == '__main__':
-    rules = 'What is the result of the expression?'
-    run_game(run, rules)
+    main()

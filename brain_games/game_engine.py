@@ -1,24 +1,28 @@
 import prompt
 
 
-GAMES_COUNT = 3
+ROUNDS = 3
 
 
-def run_game(run, game_rules):
+def play_game(run_game, game_rules):
     print('Welcome to the Brain Games!')
     name = prompt.string('May I have your name? ')
     print(f'Hello, {name}!')
     is_won = True
-    i = GAMES_COUNT
+    i = ROUNDS
 
     print(game_rules)
 
     while i:
-        user_answer, correct_answer = run()
-        if user_answer == correct_answer:
+        question, correct_answer = run_game()
+
+        print(f'Question: {question}')
+        player_answer = prompt.string('Your answer: ')
+
+        if player_answer == str(correct_answer):
             print('Correct!')
         else:
-            print(f'\'{user_answer}\' is wrong answer ;(. '
+            print(f'\'{player_answer}\' is wrong answer ;(. '
                   f'Correct answer was \'{correct_answer}\'.')
             is_won = False
             break
